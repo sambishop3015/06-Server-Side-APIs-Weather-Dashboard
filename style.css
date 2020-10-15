@@ -6,6 +6,8 @@
     border: 1px solid red;
     padding: 15px;
     text-align: center;
+    color: white;
+    background-color: rgb(65, 65, 65);
   }
   
   .row::after {
