@@ -23,6 +23,7 @@
     </script>
 </head>
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <header>
         <h1>Weather Dashboard</h1>
     </header>
@@ -30,14 +31,14 @@
         <div class="row">
             <div class="col-sm-4 search-side">
                 <h2>Search for a City:</h2>
-                <input placeholder="search city"></input>
-                <button id="search-button">~Search~</button>
-                <div class="col-sm-12" id="past-searches">~Previous Searches~</div>
+                <input type="text" id="searchQuery" placeholder="enter city"></input>
+                <input type="submit" id="search-button"></button>
+                <div class="col-sm-12" id="past-searches"></div>
             </div>
             <div class="col-sm-8 weather-side">
                 <div class="row">
                     <div class="col-sm-12">
-                    <h2 id="searched-city">Bradentucky + Date + Icon</h2>
+                    <h2 id="searched-city"></h2><img id="wicon">
                         <p id="temp">Temperature: </p>
                         <p id="hum">Humidity: </p>
                         <p id="wind">Wind Speed: </p>
@@ -48,11 +49,36 @@
                     <h2>5-Day Forecast:</h2>
                 </div>
                 <div class="row">
-                        <div class="col-sm-2 five-days">1</div>
-                        <div class="col-sm-2 five-days">2</div>
-                        <div class="col-sm-2 five-days">3</div>
-                        <div class="col-sm-2 five-days">4</div>
-                        <div class="col-sm-2 five-days">5</div>
+                        <div class="col-sm-2 five-days" id="day1">
+                            <h4 id="date1">~date~</h4>
+                            <img id="icon1">
+                            <p id="temp1">~temp~</p>
+                            <p id="hum1">~hum~</p>
+                        </div>
+                        <div class="col-sm-2 five-days" id="day2">
+                            <h4 id="date2">~date~</h4>
+                            <img id="icon2">
+                            <p id="temp2">~temp~</p>
+                            <p id="hum2">~hum~</p>
+                        </div>
+                        <div class="col-sm-2 five-days" id="day3">
+                            <h4 id="date3">~date~</h4>
+                            <img id="icon3">
+                            <p id="temp3">~temp~</p>
+                            <p id="hum3">~hum~</p>
+                        </div>
+                        <div class="col-sm-2 five-days" id="day4">
+                            <h4 id="date4">~date~</h4>
+                            <img id="icon4">
+                            <p id="temp4">~temp~</p>
+                            <p id="hum4">~hum~</p>
+                        </div>
+                        <div class="col-sm-2 five-days" id="day5">
+                            <h4 id="date5">~date~</h4>
+                            <img id="icon5">
+                            <p id="temp5">~temp~</p>
+                            <p id="hum5">~hum~</p>
+                        </div>
                 </div>
                 </div>
             </div>
@@ -62,6 +88,10 @@
     <!--JS Link-->
     <script 
         src="script.js">
+    </script>
+    <!--Moment.js Link-->
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js">
     </script>
 </body>
 </html>
