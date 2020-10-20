@@ -4,33 +4,56 @@ $(document).ready(function() {
   var lat;
   var lon;
   
-  //Current Day
+  //Current Day Date/Time
   const m = moment();
   let dateDisplay = m.format('M/D/YYYY');
   
-  //1 Day Forecast
+  //1 Day Forecast Date
   const m1 = moment().add(1, 'day');
-  let datePlus1 = m1.format('M/D/YYYY');
+  let datePlus1 = m1.format('M/D');
 
-  //2 Day Forecast
+  //2 Day Forecast Date
   const m2 = moment().add(2, 'day');
-  let datePlus2 = m2.format('M/D/YYYY');
+  let datePlus2 = m2.format('M/D');
 
-  //3 Day Forecast
+  //3 Day Forecast Date
   const m3 = moment().add(3, 'day');
-  let datePlus3 = m3.format('M/D/YYYY');
+  let datePlus3 = m3.format('M/D');
 
-  //4 Day Forecast
+  //4 Day Forecast Date
   const m4 = moment().add(4, 'day');
-  let datePlus4 = m4.format('M/D/YYYY');
+  let datePlus4 = m4.format('M/D');
 
-  //5 Day Forecast
+  //5 Day Forecast Date
   const m5 = moment().add(5, 'day');
-  let datePlus5 = m5.format('M/D/YYYY');
+  let datePlus5 = m5.format('M/D');
 
+  // Local Storage
+  // localStorage.setItem('lastSearch', $('#search-button').val())
+  // console.log(localStorage);
 
+  var loadSearch;
+  
+// Page Load Funtion -------------------------------------------------------
+  function pageLoad() {
+    loadSearch = localStorage.getItem('lastSearch');
+    console.log('load search: ' + loadSearch); 
+    //searchWeather();
+  }
+  pageLoad();
+
+// Search Button Action ----------------------------------------------------
   $('#search-button').click(function(){
-    var queryURL1 = "http://api.openweathermap.org/data/2.5/weather?q=" + $('#searchQuery').val() + "&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
+    var searchText = $('#searchQuery').val();
+    loadSearch = searchText;
+    console.log('new load search: ' + loadSearch);
+    localStorage.setItem('lastSearch', searchText)
+    //console.log(localStorage);
+    searchWeather();
+
+// Search Weather -----------------------------------------------------------
+  function searchWeather() {
+    var queryURL1 = "http://api.openweathermap.org/data/2.5/weather?q=" + loadSearch + "&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
   $.ajax({
     url: queryURL1,
     method: "GET"
@@ -54,9 +77,6 @@ $(document).ready(function() {
     $('#wicon').attr('src', iconurl);
 
     prependSearch();
-    
-
-
 
     var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat +"&lon="+ lon +"&exclude=hourly,daily&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
   $.ajax({
@@ -76,17 +96,15 @@ $(document).ready(function() {
         $('#uv').addClass('uvRed');
       }
   })
-  
 
-  //------------------START HERE ON 5 DAY ICONS------------------------------------------------
   var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + $('#searchQuery').val() + "&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
   $.ajax({
     url: queryURL3,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
+    //console.log(response);
 
-    //-- Day 1 Forecast --------------------------------------------------
+    // DAY 1 FORECAST
     // Date
     $('#date1').text(datePlus1)
 
@@ -100,13 +118,13 @@ $(document).ready(function() {
     var str1 = temperatureDayOne1.toString();
     var str2 = str1.substring(0,str1.lastIndexOf('.')+3);
     var temperatureDayOne2 = parseFloat(str2).toFixed(2)
-    $('#temp1').text('Temp: ' + temperatureDayOne2 + ' °F');
+    $('#temp1').text('T: ' + temperatureDayOne2 + ' °F');
 
     // Humidity
-    $('#hum1').text('Humidity: ' + response.list[7].main.humidity + '%')
+    $('#hum1').text('H: ' + response.list[7].main.humidity + '%')
   
   
-    //-- Day 2 Forecast --------------------------------------------------
+    // DAY 2 FORECAST
     // Date
     $('#date2').text(datePlus2)
 
@@ -120,12 +138,12 @@ $(document).ready(function() {
     var str1 = temperatureDayTwo1.toString();
     var str2 = str1.substring(0,str1.lastIndexOf('.')+3);
     var temperatureDayTwo2 = parseFloat(str2).toFixed(2)
-    $('#temp2').text('Temp: ' + temperatureDayTwo2 + ' °F');
+    $('#temp2').text('T: ' + temperatureDayTwo2 + ' °F');
 
     // Humidity
-    $('#hum2').text('Humidity: ' + response.list[14].main.humidity + '%')
+    $('#hum2').text('H: ' + response.list[14].main.humidity + '%')
   
-    //-- Day 3 Forecast --------------------------------------------------
+    // DAY 3 FORECAST
     // Date
     $('#date3').text(datePlus3)
 
@@ -139,12 +157,12 @@ $(document).ready(function() {
     var str1 = temperatureDayThree1.toString();
     var str2 = str1.substring(0,str1.lastIndexOf('.')+3);
     var temperatureDayThree2 = parseFloat(str2).toFixed(2)
-    $('#temp3').text('Temp: ' + temperatureDayThree2 + ' °F');
+    $('#temp3').text('T: ' + temperatureDayThree2 + ' °F');
 
     // Humidity
-    $('#hum3').text('Humidity: ' + response.list[21].main.humidity + '%')
+    $('#hum3').text('H: ' + response.list[21].main.humidity + '%')
 
-    //-- Day 4 Forecast --------------------------------------------------
+    // DAY 4 FORECAST
     // Date
     $('#date4').text(datePlus4)
 
@@ -158,12 +176,12 @@ $(document).ready(function() {
     var str1 = temperatureDayFour1.toString();
     var str2 = str1.substring(0,str1.lastIndexOf('.')+3);
     var temperatureDayFour2 = parseFloat(str2).toFixed(2)
-    $('#temp4').text('Temp: ' + temperatureDayFour2 + ' °F');
+    $('#temp4').text('T: ' + temperatureDayFour2 + ' °F');
 
     // Humidity
-    $('#hum4').text('Humidity: ' + response.list[28].main.humidity + '%')
+    $('#hum4').text('H: ' + response.list[28].main.humidity + '%')
 
-    //-- Day 5 Forecast --------------------------------------------------
+    // DAY 5 FORECAST
     // Date
     $('#date5').text(datePlus5)
 
@@ -177,29 +195,34 @@ $(document).ready(function() {
     var str1 = temperatureDayFive1.toString();
     var str2 = str1.substring(0,str1.lastIndexOf('.')+3);
     var temperatureDayFive2 = parseFloat(str2).toFixed(2)
-    $('#temp5').text('Temp: ' + temperatureDayFive2 + ' °F');
+    $('#temp5').text('T: ' + temperatureDayFive2 + ' °F');
 
     // Humidity
-    $('#hum5').text('Humidity: ' + response.list[35].main.humidity + '%')
+    $('#hum5').text('H: ' + response.list[35].main.humidity + '%')
 })
 })
-});
+}
+});  
 
 
 
 
 
 
-
-
+// Prepend Search City to List ---------------------------------------------
 function prependSearch() {
   var searchText = $('#searchQuery').val();
+
   var previousSearch = $('<p>' + searchText + '</p>');
   $(previousSearch).addClass('previousSearchListItem');
   $('#past-searches').prepend(previousSearch);
+  
+  localStorage.setItem('previousSearchListItem', searchText);
+  var searchList = localStorage.getItem('previousSearchListItem')
+  console.log('previousSearchListItem: ' + searchList);
 }
 
-
+// Previous Search Click Not Working ----------------------------------------
 $('.previousSearchListItem').click(function(){
   console.log('previous search list item clicked!')
 })
