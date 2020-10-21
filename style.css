@@ -36,6 +36,13 @@
     border: 1px solid rgb(221, 221, 221);
   }
 
+  #uvVal {
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+  }
+
   .five-days {
     margin: 12px;
     background-color: rgb(83, 143, 255);

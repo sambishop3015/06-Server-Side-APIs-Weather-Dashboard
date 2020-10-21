@@ -28,17 +28,13 @@ $(document).ready(function() {
   const m5 = moment().add(5, 'day');
   let datePlus5 = m5.format('M/D');
 
-  // Local Storage
-  // localStorage.setItem('lastSearch', $('#search-button').val())
-  // console.log(localStorage);
-
+  
   var loadSearch;
   
 // Page Load Funtion -------------------------------------------------------
   function pageLoad() {
     loadSearch = localStorage.getItem('lastSearch');
     console.log('load search: ' + loadSearch); 
-    //searchWeather();
   }
   pageLoad();
 
@@ -48,7 +44,6 @@ $(document).ready(function() {
     loadSearch = searchText;
     console.log('new load search: ' + loadSearch);
     localStorage.setItem('lastSearch', searchText)
-    //console.log(localStorage);
     searchWeather();
 
 // Search Weather -----------------------------------------------------------
@@ -58,7 +53,6 @@ $(document).ready(function() {
     url: queryURL1,
     method: "GET"
   }).then(function(response) {
-    //console.log(response);
     var temperature1 = (((response.main.temp)-273.15)*1.8+32);
     var str1 = temperature1.toString();
     var str2 = str1.substring(0,str1.lastIndexOf('.')+3);
@@ -66,13 +60,11 @@ $(document).ready(function() {
     $('#temp').text('Temperature: ' + temperature2 + ' °F');
     $('#hum').text('Humidity: ' + response.main.humidity + '%');
     $('#wind').text('Wind Speed: ' + response.wind.speed + ' MPH');
-    //console.log(dt);
-    $('#searched-city').text(response.name + ' ' + '(' + dateDisplay + ')');
+    $('#searched-city').html(`${response.name} (${dateDisplay})<img id="wicon" ${iconurl}>`);
     lat = (response.coord.lat);
     lon = (response.coord.lon);
 
     var mainIconCode = response.weather[0].icon;
-    //console.log(mainIconCode);
     var iconurl = "http://openweathermap.org/img/w/" + mainIconCode + ".png";
     $('#wicon').attr('src', iconurl);
 
@@ -83,17 +75,17 @@ $(document).ready(function() {
     url: queryURL2,
     method: "GET"
   }).then(function(response) {
-    //console.log(response);
+    console.log(response);
     var uvi = response.current.uvi
-    $('#uv').text('UV index: ' + uvi)
+    $('#uv').html(`UV index: <span id="uvVal">${uvi}</span>`);
       if (uvi > 0 && uvi < 3) {
-        $('#uv').addClass('uvGreen');
+        $('#uvVal').addClass('uvGreen');
       } else if (uvi > 3 && uvi < 6) {
-        $('#uv').addClass('uvYellow');
+        $('#uvVal').addClass('uvYellow');
       } else if (uvi > 6 && uvi < 8) {
-        $('#uv').addClass('uvOrange');
+        $('#uvVal').addClass('uvOrange');
       } else if (uvi > 8 && uvi < 10) {
-        $('#uv').addClass('uvRed');
+        $('#uvVal').addClass('uvRed');
       }
   })
 
@@ -102,7 +94,6 @@ $(document).ready(function() {
     url: queryURL3,
     method: "GET"
   }).then(function(response) {
-    //console.log(response);
 
     // DAY 1 FORECAST
     // Date
@@ -204,11 +195,6 @@ $(document).ready(function() {
 }
 });  
 
-
-
-
-
-
 // Prepend Search City to List ---------------------------------------------
 function prependSearch() {
   var searchText = $('#searchQuery').val();
@@ -226,13 +212,6 @@ function prependSearch() {
 $('.previousSearchListItem').click(function(){
   console.log('previous search list item clicked!')
 })
-
-
-
-
-
-
-
 
 })
 
