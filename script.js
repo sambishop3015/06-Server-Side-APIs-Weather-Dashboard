@@ -43,20 +43,32 @@ $(document).ready(function () {
   pageLoad();
 
   // Search Button Action ----------------------------------------------------
+  
+  // Enter Key in Search Field
+  $('#searchQuery').keydown(function (event) {
+    if (event.keyCode === 13) {
+      getValue();
+    }
+  })
+  
+  // Search Button Click 
   $('#search-button').click(function () {
+    getValue();
+  });
+
+  function getValue() {
     var searchText = $('#searchQuery').val();
-    $('#searchQuery').empty();
     loadSearch = searchText;
     console.log('new load search: ' + loadSearch);
     localStorage.setItem('lastSearch', searchText)
     searchWeather();
-  });
+  };
 
   // Previous Searched List Click Event
-  // $('#past-searches').click(function () {
-  //   var city = $('<p>').attr('class');
-  //   console.log(city);
-  // })
+  $('p').click(function () {
+    // var city = $('#city-grab').attr('class');
+    console.log('clicked');
+  })
 
   // Search Weather -----------------------------------------------------------
   function searchWeather() {
@@ -208,13 +220,13 @@ $(document).ready(function () {
 
   // Prepend Search City to List ---------------------------------------------
   function prependSearch() {
+    var cityClass = (($('#city-grab').attr('class')));
     var searchText = $('#searchQuery').val();
-    searchList.push(searchText)
 
     //if the searchText is not existed in the array, then push into searchList
-    if ((searchList).indexOf(!searchText)) {
-      localStorage.setItem('previousSearchListItem', JSON.stringify(searchList));
-    }
+    searchList.push(searchText)
+    localStorage.setItem('previousSearchListItem', JSON.stringify(searchList));
+
     //console.log('previousSearchListItem: ' + searchList);
     display()
   }
@@ -223,9 +235,10 @@ $(document).ready(function () {
     $('#past-searches').empty();
     for (let i = 0; i < searchList.length; i++) {
       const element = searchList[i];
-      var previousSearch = $('<p>' + element + '</p>');
+      var previousSearch = $('<p id="city-grab">' + element + '</p>');
       $(previousSearch).addClass(element);
       $('#past-searches').prepend(previousSearch);
+      $('#searchQuery').val('');
     }
   }
   // Previous Search Click Not Working ----------------------------------------
