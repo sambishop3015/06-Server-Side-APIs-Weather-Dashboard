@@ -37,7 +37,7 @@ $(document).ready(function () {
   // Page Load Funtion -------------------------------------------------------
   function pageLoad() {
     loadSearch = localStorage.getItem('lastSearch');
-    console.log('load search: ' + loadSearch);
+    //console.log('load search: ' + loadSearch);
     searchWeather();
   }
   pageLoad();
@@ -59,7 +59,7 @@ $(document).ready(function () {
   function getValue() {
     var searchText = $('#searchQuery').val();
     loadSearch = searchText;
-    console.log('new load search: ' + loadSearch);
+    //console.log('new load search: ' + loadSearch);
     localStorage.setItem('lastSearch', searchText)
     searchWeather();
   };
@@ -67,7 +67,7 @@ $(document).ready(function () {
   // Previous Searched List Click Event
   $('p').click(function () {
     // var city = $('#city-grab').attr('class');
-    console.log('clicked');
+    //console.log('clicked');
   })
 
   // Search Weather -----------------------------------------------------------
@@ -97,7 +97,7 @@ $(document).ready(function () {
         url: queryURL2,
         method: "GET"
       }).then(function (response) {
-        console.log(response);
+        //console.log(response);
         var uvi = response.current.uvi
         $('#uv').html(`UV index: <span id="uvVal">${uvi}</span>`);
         if (uvi > 0 && uvi < 3) {
@@ -243,7 +243,7 @@ $(document).ready(function () {
   }
   // Previous Search Click Not Working ----------------------------------------
   $('.previousSearchListItem').click(function () {
-    console.log('previous search list item clicked!')
+    //console.log('previous search list item clicked!')
   })
 
   display();
