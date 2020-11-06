@@ -72,7 +72,7 @@ $(document).ready(function () {
 
   // Search Weather -----------------------------------------------------------
   function searchWeather() {
-    var queryURL1 = "http://api.openweathermap.org/data/2.5/weather?q=" + loadSearch + "&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
+    var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" + loadSearch + "&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
     $.ajax({
       url: queryURL1,
       method: "GET"
@@ -89,7 +89,7 @@ $(document).ready(function () {
       lon = (response.coord.lon);
 
       var mainIconCode = response.weather[0].icon;
-      var iconurl = "http://openweathermap.org/img/w/" + mainIconCode + ".png";
+      var iconurl = "https://openweathermap.org/img/w/" + mainIconCode + ".png";
       $('#wicon').attr('src', iconurl);
 
       var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
@@ -125,7 +125,7 @@ $(document).ready(function () {
 
         // Icon
         var iconCode1 = response.list[7].weather[0].icon;
-        var iconurl = "http://openweathermap.org/img/w/" + iconCode1 + ".png";
+        var iconurl = "https://openweathermap.org/img/w/" + iconCode1 + ".png";
         $('#icon1').attr('src', iconurl);
 
         // Temperature
@@ -145,7 +145,7 @@ $(document).ready(function () {
 
         // Icon
         var iconCode2 = response.list[14].weather[0].icon;
-        var iconurl2 = "http://openweathermap.org/img/w/" + iconCode2 + ".png";
+        var iconurl2 = "https://openweathermap.org/img/w/" + iconCode2 + ".png";
         $('#icon2').attr('src', iconurl2);
 
         // Temperature
@@ -164,7 +164,7 @@ $(document).ready(function () {
 
         // Icon
         var iconCode3 = response.list[21].weather[0].icon;
-        var iconurl3 = "http://openweathermap.org/img/w/" + iconCode3 + ".png";
+        var iconurl3 = "https://openweathermap.org/img/w/" + iconCode3 + ".png";
         $('#icon3').attr('src', iconurl3);
 
         // Temperature
@@ -183,7 +183,7 @@ $(document).ready(function () {
 
         // Icon
         var iconCode4 = response.list[28].weather[0].icon;
-        var iconurl4 = "http://openweathermap.org/img/w/" + iconCode4 + ".png";
+        var iconurl4 = "https://openweathermap.org/img/w/" + iconCode4 + ".png";
         $('#icon4').attr('src', iconurl4);
 
         // Temperature
@@ -202,7 +202,7 @@ $(document).ready(function () {
 
         // Icon
         var iconCode5 = response.list[35].weather[0].icon;
-        var iconurl5 = "http://openweathermap.org/img/w/" + iconCode5 + ".png";
+        var iconurl5 = "https://openweathermap.org/img/w/" + iconCode5 + ".png";
         $('#icon5').attr('src', iconurl5);
 
         // Temperature
