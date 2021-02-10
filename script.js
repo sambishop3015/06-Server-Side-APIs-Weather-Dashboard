@@ -74,8 +74,7 @@ $(document).ready(function () {
 
   // Search Weather -----------------------------------------------------------
   function searchWeather() {
-    //https://cors-anywhere.herokuapp.com/
-    var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" + loadSearch + "&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
+    var queryURL1 = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=" + loadSearch + "&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
     $.ajax({
       url: queryURL1,
       method: "GET"
@@ -95,8 +94,7 @@ $(document).ready(function () {
       var iconurl = "https://openweathermap.org/img/w/" + mainIconCode + ".png";
       $('#wicon').attr('src', iconurl);
 
-      //https://cors-anywhere.herokuapp.com/
-      var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
+      var queryURL2 = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
       $.ajax({
         url: queryURL2,
         method: "GET"
@@ -117,8 +115,7 @@ $(document).ready(function () {
         prependSearch();
       })
 
-      //https://cors-anywhere.herokuapp.com/
-      var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + loadSearch + "&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
+      var queryURL3 = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=" + loadSearch + "&appid=0d23ce5bcc2e4f505cf7ec85adf351ab";
       $.ajax({
         url: queryURL3,
         method: "GET"
